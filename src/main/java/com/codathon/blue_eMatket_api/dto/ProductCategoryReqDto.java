@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class ProductCategoryReqDto {
-    private int prCategoryId;
     private String categoryName;
     private String description;
     private int status;
