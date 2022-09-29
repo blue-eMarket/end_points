@@ -7,5 +7,6 @@ import lombok.Data;
 public class PolicyRespDto extends Auditable<String> {
     private int policyId;
     private String policyStatement;
+    private String policyType;
     private int status;
 }

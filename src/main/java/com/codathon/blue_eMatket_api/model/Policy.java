@@ -16,5 +16,6 @@ public class Policy extends Auditable<String> implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int policyId;
     private String policyStatement;
+    private String policyType;
     private int status;
 }

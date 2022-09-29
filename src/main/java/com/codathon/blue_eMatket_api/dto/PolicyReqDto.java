@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class PolicyReqDto {
     private String policyStatement;
+    private String policyType;
     private int status;
 }

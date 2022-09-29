@@ -10,16 +10,13 @@ import java.io.Serializable;
 
 @Data
 @Entity
-public class Manufacturer  extends Auditable<String> implements Serializable {
+public class Company extends Auditable<String> implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String manufacturerId;
-    private String image;
-    private String email;
-    private String phoneNumber;
+    private String companyId;
+    private String slogan;
     private String brand;
-    private String manufacturerType;
     private int status; 
 }
