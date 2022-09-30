@@ -16,6 +16,7 @@ public class Users extends Auditable<String> implements Serializable {
     private String userName;
     private int status;
     private String password;
+    private String profile;
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "roleId", referencedColumnName = "roleId")
     private Role role;

@@ -15,6 +15,8 @@ public class Vendor  extends Auditable<String> implements Serializable {
     private String email;
     private String phoneNumber;
     private String address;
+    private String NIDA;
+    private String ZanId;
     private int status;
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "vendorTypeId", referencedColumnName = "vendorTypeId")
