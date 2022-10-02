@@ -14,12 +14,16 @@ public class Product extends Auditable<String> implements Serializable {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String productId;
+    private String productCode;
+    private String productName;
     private String price;
     private int status;
-    private int productCategoryId;
     private int rateId;
     private String productDescription;
+
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "productCategoryId",referencedColumnName = "productCategoryId")
+    private ProductCategory productCategory;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "discountId", referencedColumnName = "discountId")

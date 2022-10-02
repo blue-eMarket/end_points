@@ -1,6 +1,7 @@
 package com.codathon.blue_eMatket_api.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class ProductReqDto {
@@ -10,4 +11,5 @@ public class ProductReqDto {
     private int rateId;
     private String productDescription;
     private int discountId;
+    private MultipartFile primaryImage;
 }

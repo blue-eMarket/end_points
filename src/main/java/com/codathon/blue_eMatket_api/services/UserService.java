@@ -17,6 +17,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 @Service
@@ -26,6 +29,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
+    private final Path root = Paths.get("uploads");
 
     public UserService(ModelMapper modelMapper, UserRepository userRepository,RoleRepository roleRepository){
         this.modelMapper = modelMapper;
@@ -33,11 +37,23 @@ public class UserService {
         this.roleRepository = roleRepository;
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
-    public ResponseEntity add (UserReqDto userReqDto){
-        Optional<Role> r =roleRepository.findById(userReqDto.getRoleId());
+    public Boolean add (UserReqDto userReqDto) {
+        Random rand = new Random();
+        int upperbound = 100;
+        int int_random = rand.nextInt(upperbound);
+        Optional<Role> r = roleRepository.findById(userReqDto.getRoleId());
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
-        if(r.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Role with id"+" "+userReqDto.getRoleId()+" "+"doesn't exist");
+        if (r.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Role with id" + " " + userReqDto.getRoleId() + " " + "doesn't exist");
+        }
+        String ext;
+        try {
+            String fileName = userReqDto.getProfile().getOriginalFilename();
+            ext = fileName.substring(userReqDto.getProfile().getOriginalFilename().lastIndexOf(".") + 1);
+            Files.copy(userReqDto.getProfile().getInputStream(), this.root.resolve(String.valueOf(int_random) + "." + ext));
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
         Users users = modelMapper.map(userReqDto, Users.class);
@@ -45,11 +61,12 @@ public class UserService {
         Role role = r.get();
         users.setRole(role);
         users.setPassword(encPsd);
+        users.setProfile("/uploads/" + String.valueOf(int_random) + "." + ext);
         userRepository.save(users);
 
-        Map response=new HashMap();
-        response.put("response",Boolean.TRUE);
-        return  ResponseEntity.ok().body(response);
+        Map response = new HashMap();
+        response.put("response", Boolean.TRUE);
+        return Boolean.TRUE;
 
     }
     public List<UserRespDto> getAll(int page, int size){

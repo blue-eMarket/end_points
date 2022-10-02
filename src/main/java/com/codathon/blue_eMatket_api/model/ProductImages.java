@@ -12,6 +12,7 @@ public class ProductImages extends Auditable<String> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int prImageId;
+    private String productImage;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "productId", referencedColumnName = "productId")

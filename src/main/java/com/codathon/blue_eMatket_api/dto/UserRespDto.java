@@ -9,4 +9,5 @@ public class UserRespDto {
     private int status;
     private String password;
     private int roleId;
+    private String profile;
 }
