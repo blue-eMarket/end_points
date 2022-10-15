@@ -13,8 +13,8 @@ public class ProductImages extends Auditable<String> implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int prImageId;
     private String productImage;
-
+    private int isPrimary;
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "productId", referencedColumnName = "productId")
+    @JoinColumn(name = "productCode", referencedColumnName = "productCode")
     private Product product;
 }

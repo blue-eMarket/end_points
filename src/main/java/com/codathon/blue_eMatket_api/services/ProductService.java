@@ -37,35 +37,10 @@ public class ProductService {
         this.productImageRepository = productImageRepository;
     }
     public ResponseEntity add (ProductReqDto productReqDto){
-        Random rand = new Random();
-        int upperbound = 100;
-        int int_random = rand.nextInt(upperbound);
-        Optional<ProductCategory> pc = productCategoryRepository.findById(productReqDto.getProductCategoryId());
-        if(pc.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Product Category with id"+" "+productReqDto.getProductCategoryId()+" "+"doesn't exist");
-        }
-        String ext;
-//        try {
-//            String fileName = productReqDto.getPrimaryImage().getOriginalFilename();
-//            ext = fileName.substring(productReqDto.getPrimaryImage().getOriginalFilename().lastIndexOf(".") + 1);
-//            Files.copy(productReqDto.getPrimaryImage().getInputStream(), this.root.resolve(String.valueOf(int_random) + "." + ext));
-//
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        Product product = modelMapper.map(productReqDto, Product.class);
-//        ProductCategory productCategory = pc.get();
-//        product.setProductCategory(productCategory);
-//        product.setStatus(1);
-//
-//
-//        productRepository.save(product);
-//        ProductImages productImages = new ProductImages();
-//
-//        productImages.setProductImage("/uploads/" + String.valueOf(int_random) + "." + ext);
-//        productImages.setProduct(product);
-
+        Product product = modelMapper.map(productReqDto,Product.class);
+        ProductCategory productCategory = new ProductCategory();
+        productCategory.setPrCategoryId(productReqDto.getProductCategoryId());
+        productRepository.save(product);
         Map response=new HashMap();
         response.put("response",Boolean.TRUE);
         return  ResponseEntity.ok().body(response);

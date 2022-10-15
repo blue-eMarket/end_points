@@ -11,5 +11,5 @@ public class ProductReqDto {
     private int rateId;
     private String productDescription;
     private int discountId;
-    private MultipartFile primaryImage;
+
 }

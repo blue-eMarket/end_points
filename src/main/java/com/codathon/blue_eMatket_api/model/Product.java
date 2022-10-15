@@ -22,7 +22,7 @@ public class Product extends Auditable<String> implements Serializable {
     private String productDescription;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "productCategoryId",referencedColumnName = "productCategoryId")
+    @JoinColumn(name = "prCategoryId",referencedColumnName = "prCategoryId")
     private ProductCategory productCategory;
 
     @ManyToOne(cascade = CascadeType.REFRESH)

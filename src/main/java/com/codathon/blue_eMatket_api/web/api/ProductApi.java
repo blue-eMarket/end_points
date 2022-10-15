@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/products")
 public interface ProductApi {
     @RequestMapping(value = "/", method = RequestMethod.POST,  consumes = "multipart/form-data")
-    public ResponseEntity addProduct(@ModelAttribute ProductReqDto productReqDto );
+//    public ResponseEntity addProduct(@ModelAttribute ProductReqDto productReqDto );
+    public ResponseEntity addProduct(@RequestBody ProductReqDto productReqDto );
 
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getProducts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size);

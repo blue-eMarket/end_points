@@ -6,5 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 public class ProductImageReqDto {
     private String productId;
+    private int isPrimary;
     private MultipartFile productImage;
+
 }
