@@ -40,6 +40,9 @@ public class ProductService {
         Product product = modelMapper.map(productReqDto,Product.class);
         ProductCategory productCategory = new ProductCategory();
         productCategory.setPrCategoryId(productReqDto.getProductCategoryId());
+        Discount discount = new Discount();
+        discount.setDiscountId(productReqDto.getDiscountId());
+        product.setDiscount(discount);
         productRepository.save(product);
         Map response=new HashMap();
         response.put("response",Boolean.TRUE);
