@@ -49,16 +49,16 @@ public class ProductImageService {
             String fileName = productImageReqDto.getProductImage().getOriginalFilename();
             ext = fileName.substring(productImageReqDto.getProductImage().getOriginalFilename().lastIndexOf(".") + 1);
             Files.copy(productImageReqDto.getProductImage().getInputStream(), this.root.resolve(String.valueOf(int_random) + "." + ext));
-
+            ProductImages productImages = modelMapper.map(productImageReqDto, ProductImages.class);
+            Product product = pr.get();
+            productImages.setProduct(product);
+            productImages.setProductImage("/uploads/" + String.valueOf(int_random) + "." + ext);
+            productImageRepository.save(productImages);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        ProductImages productImages = modelMapper.map(productImageReqDto, ProductImages.class);
-        Product product = pr.get();
-        productImages.setProduct(product);
-        productImages.setProductImage("/uploads/" + String.valueOf(int_random) + "." + ext);
-        productImageRepository.save(productImages);
+
 
         Map response = new HashMap();
         response.put("response", Boolean.TRUE);

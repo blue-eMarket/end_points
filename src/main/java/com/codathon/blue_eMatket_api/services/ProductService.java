@@ -40,14 +40,15 @@ public class ProductService {
         Product product = modelMapper.map(productReqDto,Product.class);
         ProductCategory productCategory = new ProductCategory();
         productCategory.setPrCategoryId(productReqDto.getProductCategoryId());
+        product.setProductCategory(productCategory);
+        Vendor vendor = new Vendor();
+        vendor.setVendorId(productReqDto.getVendorId());
+        product.setVendor(vendor);
 
-//        Discount discount = new Discount();
-//        discount.setDiscountId(productReqDto.getDiscountId());
-//        product.setDiscount(discount);
         productRepository.save(product);
 //        Map response=new HashMap();
 //        response.put("response",Boolean.TRUE);
-        return  ResponseEntity.ok().body(product);
+        return  ResponseEntity.ok().body(product.getProductCode());
     }
     public List<ProductRespDto> getAll(int page, int size){
         Pageable pageable = PageRequest.of(page, size);

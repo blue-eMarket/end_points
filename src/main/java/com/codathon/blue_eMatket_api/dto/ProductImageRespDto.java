@@ -8,5 +8,5 @@ public class ProductImageRespDto {
     private int prImageId;
     private String productId;
     private int isPrimary;
-    private MultipartFile productImage;
+    private String productImage;
 }

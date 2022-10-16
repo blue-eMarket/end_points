@@ -9,6 +9,8 @@ public class ProductReqDto {
     private int status;
     private int productCategoryId;
     private int rateId;
+    private String productName;
+    private String  vendorId;
     private String productDescription;
     private int discountId;
 

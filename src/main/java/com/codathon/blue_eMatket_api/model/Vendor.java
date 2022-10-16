@@ -4,6 +4,8 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+
 @Data
 @Entity
 public class Vendor  extends Auditable<String> implements Serializable {
@@ -18,6 +20,8 @@ public class Vendor  extends Auditable<String> implements Serializable {
     private String NIDA;
     private String ZanId;
     private int status;
+    @OneToMany(mappedBy = "vendor",fetch = FetchType.LAZY)
+    private List<Product> products;
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "vendorTypeId", referencedColumnName = "vendorTypeId")
     private VendorType vendorType;
