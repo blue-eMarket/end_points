@@ -10,7 +10,7 @@ public class ProductRespDto {
     private String productName;
     private int productCategoryId;
     private int rateId;
-    private String  vendorId;
+    private String  vendorCode;
     private String productDescription;
     private int discountId;
 }

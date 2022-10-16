@@ -56,6 +56,7 @@ public class ProductService {
         List list = new ArrayList();
         for(Product station: productRepository.findAll(pageable)){
             productRespDto= modelMapper.map(station,ProductRespDto.class);
+            productRespDto.setVendorCode(station.getVendor().getVendorId());
             list.add(productRespDto);
         }
         return list;
