@@ -32,7 +32,7 @@ public class FeedbackService {
     public ResponseEntity add (FeedbackReqDto feedbackReqDto){
         Optional<FeedbackTypes> ft = feedbackTypeRepository.findById(feedbackReqDto.getFeedbackTypeId());
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
-        if(ft.isEmpty()){
+        if(!ft.isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Feedback type with id"+" "+ feedbackReqDto.getFeedbackTypeId()+" "+"doesn't exist");
         }
 
