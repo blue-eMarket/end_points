@@ -52,7 +52,7 @@ public class ProductImageService {
             ProductImages productImages = modelMapper.map(productImageReqDto, ProductImages.class);
             Product product = pr.get();
             productImages.setProduct(product);
-            productImages.setProductImage("/uploads/" + String.valueOf(int_random) + "." + ext);
+            productImages.setProductImage(String.valueOf(int_random) + "." + ext);
             productImageRepository.save(productImages);
         } catch (Exception e) {
             throw new RuntimeException(e);
