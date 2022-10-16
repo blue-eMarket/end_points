@@ -32,7 +32,7 @@ public class DiscountService {
     public ResponseEntity add (DiscountReqDto discountReqDto){
         Optional<DiscountTypes> dt = discountTypeRepository.findById(discountReqDto.getDiscountTypeId());
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
-        if(dt.isEmpty()){
+        if(dt.isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Discount type with id"+" "+ discountReqDto.getDiscountTypeId()+" "+"doesn't exist");
         }
 

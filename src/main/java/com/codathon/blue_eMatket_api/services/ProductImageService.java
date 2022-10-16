@@ -41,7 +41,7 @@ public class ProductImageService {
         int int_random = rand.nextInt(upperbound);
         Optional<Product> pr = productRepository.findById(productImageReqDto.getProductId());
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
-        if (pr.isEmpty()) {
+        if (!pr.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product with id" + " " + productImageReqDto.getProductId() + " " + "doesn't exist");
         }
         String ext;

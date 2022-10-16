@@ -43,7 +43,7 @@ public class UserService {
         int int_random = rand.nextInt(upperbound);
         Optional<Role> r = roleRepository.findById(userReqDto.getRoleId());
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
-        if (r.isEmpty()) {
+        if (!r.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Role with id" + " " + userReqDto.getRoleId() + " " + "doesn't exist");
         }
         String ext;
@@ -81,7 +81,7 @@ public class UserService {
     }
     public UserRespDto getById(String userId){
         Optional<Users> u = userRepository.findById(userId);
-        if(u.isEmpty()){
+        if(!u.isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,userId+"  "+"doesn't exist");
         }
         return modelMapper.map(u.get(), UserRespDto.class);

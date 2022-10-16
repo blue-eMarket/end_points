@@ -33,7 +33,7 @@ public class VendorService {
     public ResponseEntity add (VendorReqDto vendorReqDto){
         Vendor vendor = modelMapper.map(vendorReqDto, Vendor.class);
         Optional<VendorType> vt = vendorTypeRepository.findById(vendorReqDto.getVendorTypeId());
-        if(vt.isEmpty()){
+        if(!vt.isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Vendor type with id"+" "+vendorReqDto.getVendorTypeId()+" "+"doesn't exist");
         }
         VendorType vendorType = vt.get();
