@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RequestMapping("/products")
 public interface ProductApi {
-    @RequestMapping(value = "/", method = RequestMethod.POST,  consumes = "multipart/form-data")
+//    consumes = "multipart/form-data"
+    @RequestMapping(value = "/", method = RequestMethod.POST)
 //    public ResponseEntity addProduct(@ModelAttribute ProductReqDto productReqDto );
     public ResponseEntity addProduct(@RequestBody ProductReqDto productReqDto );
 

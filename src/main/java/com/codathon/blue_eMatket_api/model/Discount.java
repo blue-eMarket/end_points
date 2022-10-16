@@ -21,6 +21,6 @@ public class Discount extends Auditable<String> implements Serializable {
     @JoinColumn(name = "discountTypeId", referencedColumnName = "discountTypeId")
     private DiscountTypes discountTypes;
 
-    @OneToMany(mappedBy = "discount",fetch = FetchType.LAZY)
-    private List<Product> products;
+//    @OneToMany(mappedBy = "discount",fetch = FetchType.LAZY)
+//    private List<Product> products;
 }

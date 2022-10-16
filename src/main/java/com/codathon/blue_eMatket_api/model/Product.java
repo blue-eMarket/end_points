@@ -25,9 +25,9 @@ public class Product extends Auditable<String> implements Serializable {
     @JoinColumn(name = "prCategoryId",referencedColumnName = "prCategoryId")
     private ProductCategory productCategory;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "discountId", referencedColumnName = "discountId")
-    private Discount discount;
+//    @ManyToOne(cascade = CascadeType.REFRESH)
+//    @JoinColumn(name = "discountId", referencedColumnName = "discountId")
+//    private Discount discount;
 
     @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
     private List<ProductImages> productImages;

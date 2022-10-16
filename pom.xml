@@ -14,7 +14,7 @@
 	<name>blue_eMatket_api</name>
 	<description>Api for Codathon project of blue_eMatket</description>
 	<properties>
-		<java.version>11</java.version>
+<!--		<java.version>11</java.version>-->
 	</properties>
 	<dependencies>
 		<dependency>
