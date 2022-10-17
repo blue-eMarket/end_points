@@ -39,7 +39,7 @@ public class ProductCategoryService {
         List list = new ArrayList();
         for(ProductCategory category: categoryRepository.findAll(pageable)){
             categoryRespDto = modelMapper.map(category,ProductCategoryRespDto.class);
-            list.add(category);
+            list.add(categoryRespDto);
         }
         return list;
     }
