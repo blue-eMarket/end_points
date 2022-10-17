@@ -62,4 +62,24 @@ public class ProductService {
         return list;
     }
 
+    public List<ProductRespDto> getAllByImages(int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        ProductResImageDto productRespDto = null;
+        ProductImageRespDto productImageRespDto=null;
+        List list = new ArrayList();
+
+        for(Product station: productRepository.findAll(pageable)){
+            productRespDto= modelMapper.map(station,ProductResImageDto.class);
+            productRespDto.setVendorCode(station.getVendor().getVendorId());
+            List<ProductImageRespDto> list1=new ArrayList<>();
+            for (ProductImages productImages:productImageRepository.findByProduct(station.getProductCode())){
+                productImageRespDto = modelMapper.map(productImages,ProductImageRespDto.class);
+                list1.add(productImageRespDto);
+            }
+            productRespDto.setProductImageRespDto(list1);
+            list.add(productRespDto);
+        }
+        return list;
+    }
+
 }

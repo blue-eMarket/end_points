@@ -21,4 +21,10 @@ public class ProductController implements ProductApi {
     public ResponseEntity getProducts(int page, int size) {
         return ResponseEntity.ok().body(productService.getAll(page, size));
     }
+
+    @Override
+    public ResponseEntity getProductsImage(int page, int size) {
+        return ResponseEntity.ok().body(productService.getAllByImages(page, size));
+
+    }
 }
