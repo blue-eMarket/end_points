@@ -1,5 +1,6 @@
 package com.codathon.blue_eMatket_api.services;
 
+import com.codathon.blue_eMatket_api.dto.LoginDto;
 import com.codathon.blue_eMatket_api.dto.UserReqDto;
 import com.codathon.blue_eMatket_api.dto.UserRespDto;
 import com.codathon.blue_eMatket_api.model.Role;
@@ -104,4 +105,17 @@ public class UserService {
         return  ResponseEntity.ok().body(response);
 
     }
+
+    public UserRespDto getLogin(LoginDto loginDto){
+        String encPsd = this.passwordEncoder.encode(loginDto.getPassword());
+
+        Optional<Users> u = userRepository.findByUserNameAndPassword(loginDto.getUserName(),encPsd);
+        if(!u.isPresent()){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "doesn't exist");
+        }
+        UserRespDto userRespDto=modelMapper.map(u.get(), UserRespDto.class);
+        userRespDto.setVendorCode(u.get().getVendorId());
+        return  userRespDto;
+    }
+
 }

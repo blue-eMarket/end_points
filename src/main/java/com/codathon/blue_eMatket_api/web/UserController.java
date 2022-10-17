@@ -1,5 +1,6 @@
 package com.codathon.blue_eMatket_api.web;
 
+import com.codathon.blue_eMatket_api.dto.LoginDto;
 import com.codathon.blue_eMatket_api.dto.UserReqDto;
 import com.codathon.blue_eMatket_api.services.UserService;
 import com.codathon.blue_eMatket_api.web.api.UserApi;
@@ -27,5 +28,11 @@ public class UserController implements UserApi {
 
     public ResponseEntity editUser(String id, UserReqDto userReqDto) {
         return ResponseEntity.ok().body(userService.edit(id, userReqDto));
+    }
+
+    @Override
+    public ResponseEntity auth(LoginDto loginDto) {
+        return ResponseEntity.ok().body(userService.getLogin(loginDto));
+
     }
 }

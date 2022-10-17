@@ -1,5 +1,6 @@
 package com.codathon.blue_eMatket_api.web.api;
 
+import com.codathon.blue_eMatket_api.dto.LoginDto;
 import com.codathon.blue_eMatket_api.dto.UserReqDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,5 +20,7 @@ public interface UserApi {
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
     public ResponseEntity editUser(@PathVariable("id") String id, @RequestBody UserReqDto userReqDto);
 
+    @RequestMapping(value = "/auth/", method = RequestMethod.POST)
+    public ResponseEntity auth(@RequestBody LoginDto loginDto );
 
 }

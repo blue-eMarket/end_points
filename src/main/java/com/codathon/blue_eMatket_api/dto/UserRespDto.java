@@ -10,4 +10,5 @@ public class UserRespDto {
     private String password;
     private int roleId;
     private String profile;
+    private String vendorCode;
 }

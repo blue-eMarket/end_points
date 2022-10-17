@@ -9,5 +9,6 @@ public class UserReqDto {
     private int status;
     private String password;
     private int roleId;
+    private String vendorId;
     private MultipartFile profile;
 }
