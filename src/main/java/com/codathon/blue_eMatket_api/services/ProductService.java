@@ -74,6 +74,7 @@ public class ProductService {
             List<ProductImageRespDto> list1=new ArrayList<>();
             for (ProductImages productImages:productImageRepository.findByProduct(station.getProductCode())){
                 productImageRespDto = modelMapper.map(productImages,ProductImageRespDto.class);
+                productImageRespDto.setProductId(productImages.getProduct().getProductCode());
                 list1.add(productImageRespDto);
             }
             productRespDto.setProductImageRespDto(list1);

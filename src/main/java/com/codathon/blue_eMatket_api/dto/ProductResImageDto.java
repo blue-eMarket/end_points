@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class ProductResImageDto {
+    private String productCode;
     private String price;
     private int status;
     private int productCategoryId;
