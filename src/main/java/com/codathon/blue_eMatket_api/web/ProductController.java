@@ -23,6 +23,18 @@ public class ProductController implements ProductApi {
     }
 
     @Override
+    public ResponseEntity getById(String id) {
+        return ResponseEntity.ok().body(productService.getProductById(id));
+
+    }
+
+    @Override
+    public ResponseEntity getChangeStatu(String id) {
+        return ResponseEntity.ok().body(productService.changeStatus(id));
+
+    }
+
+    @Override
     public ResponseEntity getProductsImage(int page, int size) {
         return ResponseEntity.ok().body(productService.getAllByImages(page, size));
 

@@ -83,4 +83,46 @@ public class ProductService {
         return list;
     }
 
+
+    public ResponseEntity changeStatus(String id){
+        Optional<Product> product = productRepository.findById(id);
+        if(!product.isPresent()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        switch (product.get().getStatus()){
+            case 1:
+                product.get().setStatus(0);
+
+                break;
+            case 0:
+                product.get().setStatus(1);
+                break;
+
+        }
+
+        productRepository.save(product.get());
+        return ResponseEntity.ok(Boolean.TRUE);
+    }
+
+    public ResponseEntity getProductById(String id){
+        Optional<Product> product = productRepository.findById(id);
+        if(!product.isPresent()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+//        ProductResImageDto productRespDto = null;
+        ProductResImageDto productRespDto= modelMapper.map(product.get(),ProductResImageDto.class);
+        productRespDto.setVendorCode(product.get().getVendor().getVendorId());
+        ProductImageRespDto productImageRespDto=null;
+        List<ProductImageRespDto> list1=new ArrayList<>();
+        for (ProductImages productImages:productImageRepository.findByProduct(product.get().getProductCode())){
+            productImageRespDto = modelMapper.map(productImages,ProductImageRespDto.class);
+            productImageRespDto.setProductId(productImages.getProduct().getProductCode());
+            list1.add(productImageRespDto);
+        }
+        productRespDto.setProductImageRespDto(list1);
+//        list.add(productRespDto);
+        return ResponseEntity.ok(Boolean.TRUE);
+    }
+
 }
